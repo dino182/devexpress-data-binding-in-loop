@@ -1,0 +1,1 @@
+This sample application demonstrates a bug when binding to multiple DevExpress controls.

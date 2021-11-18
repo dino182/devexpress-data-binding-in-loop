@@ -1,0 +1,19 @@
+﻿@using BlazorApp.Shared
+@using DevExpress.Blazor
+
+<DxFormLayoutItem Caption="Checkbox" ColSpanXs="12">
+    <DxCheckBox T="bool"
+                @bind-Checked="@Forecast.Visible"
+                LabelPosition="@LabelPosition.Right"
+                LabelWrapMode="@LabelWrapMode.NoWrap">
+        Visible
+    </DxCheckBox>
+</DxFormLayoutItem>
+<DxFormLayoutItem Caption="Text" ColSpanXs="12" Visible="@Forecast.Visible">
+    <DxTextBox @bind-Text="@Forecast.Summary" />
+</DxFormLayoutItem>
+
+@code {
+    [Parameter]
+    public WeatherForecast Forecast { get; set; }
+}

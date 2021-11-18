@@ -1,7 +1,33 @@
 ﻿@page "/"
+@using BlazorApp.Shared
+@using DevExpress.Blazor
+@inject HttpClient Http
 
-<h1>Hello, world!</h1>
+@if (forecasts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <DxButton Text="StateHasChanged" Click="@StateHasChanged" />
 
-Welcome to your new app.
+    <div class="container">
+        @foreach (var forecast in forecasts)
+        {
+            <div class="row">
+                <div class="col">
+                    <TopLevelComponent Forecast="@forecast" />
+                </div>
+            </div>
+        }
+    </div>
+}
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+@code {
+    private WeatherForecast[] forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
+    }
+}
